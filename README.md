@@ -66,12 +66,12 @@ only the intended repository into the agent container, preferably read-only.
 | `GIT_REPOSITORY_PATH` | unset | Git checkout for local MCP operations |
 | `GIT_AGENT_BASE_URL` | `http://localhost:8001` | A2A URL advertised to other services |
 | `GIT_AGENT_MODEL` | `gemini-3.6-flash` | ADK model name |
-| `GIT_AGENT_TEMPERATURE` | `0` | Model sampling temperature (0 to 1) |
+| `GIT_AGENT_TEMPERATURE` | `1.0` | Model sampling temperature (0 to 1) |
 | `PORT` | `8001` | A2A listening port |
 
 Google recommends the default temperature of 1.0 for Gemini 3 models because
 lower values can cause looping or weaker reasoning in some tasks. This service
-uses 0 as requested; change `GIT_AGENT_TEMPERATURE` if that behavior appears.
+uses that recommended default.
 See the [Gemini 3 guidance](https://ai.google.dev/gemini-api/docs/gemini-3#temperature).
 
 ## Container and Helm

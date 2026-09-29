@@ -10,7 +10,8 @@ service:
 
 gitmcpUrl: https://gitmcp.io/docs
 model: gemini-3.6-flash
-temperature: "0"
+# Google recommends 1.0 for Gemini 3; lower values can degrade reasoning.
+temperature: "1.0"
 existingSecret: ""
 extraEnv: []
 

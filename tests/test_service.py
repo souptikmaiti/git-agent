@@ -35,7 +35,7 @@ def test_model_and_temperature_are_passed_to_adk():
     agent = build_agent(Settings())
 
     assert agent.model == "gemini-3.6-flash"
-    assert agent.generate_content_config.temperature == 0
+    assert agent.generate_content_config.temperature == 1.0
 
 
 def test_settings_load_repo_local_env(tmp_path: Path, monkeypatch):

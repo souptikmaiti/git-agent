@@ -14,7 +14,8 @@ class Settings:
     git_repository_path: Path | None = None
     public_base_url: str = "http://localhost:8001"
     model: str = "gemini-3.6-flash"
-    temperature: float = 0.0
+    # Google recommends the default 1.0 for Gemini 3 to avoid degraded reasoning.
+    temperature: float = 1.0
     port: int = 8001
 
     @classmethod
@@ -28,7 +29,7 @@ class Settings:
                 "GIT_AGENT_BASE_URL", "http://localhost:8001"
             ).strip(),
             model=os.getenv("GIT_AGENT_MODEL", "gemini-3.6-flash"),
-            temperature=float(os.getenv("GIT_AGENT_TEMPERATURE", "0")),
+            temperature=float(os.getenv("GIT_AGENT_TEMPERATURE", "1.0")),
             port=int(os.getenv("PORT", "8001")),
         )
         settings.validate()
