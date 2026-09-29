@@ -9,29 +9,15 @@ from git_agent.config import Settings
 
 
 def build_card(settings: Settings) -> AgentCard:
-    skills: list[AgentSkill] = []
-    if settings.gitmcp_url:
-        skills.append(
-            AgentSkill(
-                id="github_code_research",
-                name="Public GitHub code research",
-                description="Search public GitHub repository documentation and code.",
-                tags=["git", "github", "code-search", "documentation"],
-                examples=[
-                    "How is request routing implemented in owner/repository?"
-                ],
-            )
+    skills = [
+        AgentSkill(
+            id="github_code_research",
+            name="GitHub code research",
+            description="Search and inspect accessible public or private GitHub repositories.",
+            tags=["git", "github", "code-search", "repository"],
+            examples=["How is request routing implemented in owner/repository?"],
         )
-    if settings.git_repository_path is not None:
-        skills.append(
-            AgentSkill(
-                id="local_git_inspection",
-                name="Local Git inspection",
-                description="Read status, branches, commit history, and diffs of the configured checkout.",
-                tags=["git", "status", "history", "diff"],
-                examples=["Show recent commits and uncommitted changes."],
-            )
-        )
+    ]
 
     return AgentCard(
         name="git_agent",

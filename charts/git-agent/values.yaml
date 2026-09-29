@@ -8,11 +8,15 @@ image:
 service:
   port: 8001
 
-gitmcpUrl: https://gitmcp.io/docs
+# Set to the in-cluster address of the separately deployed GitHub MCP Server.
+githubMcpUrl: http://github-mcp:8082/
 model: gemini-3.6-flash
 # Google recommends 1.0 for Gemini 3; lower values can degrade reasoning.
 temperature: "1.0"
 existingSecret: ""
+# Secret containing a GitHub PAT or other bearer token accepted by GitHub MCP.
+existingGithubMcpSecret: ""
+githubMcpSecretKey: GITHUB_MCP_TOKEN
 extraEnv: []
 
 resources:

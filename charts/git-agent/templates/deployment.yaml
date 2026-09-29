@@ -29,8 +29,8 @@ spec:
               value: "8001"
             - name: GIT_AGENT_BASE_URL
               value: "http://{{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port }}"
-            - name: GITMCP_URL
-              value: {{ .Values.gitmcpUrl | quote }}
+            - name: GITHUB_MCP_URL
+              value: {{ .Values.githubMcpUrl | quote }}
             - name: GIT_AGENT_MODEL
               value: {{ .Values.model | quote }}
             - name: GIT_AGENT_TEMPERATURE
@@ -41,6 +41,13 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.existingSecret | quote }}
                   key: GOOGLE_API_KEY
+            {{- end }}
+            {{- if .Values.existingGithubMcpSecret }}
+            - name: GITHUB_MCP_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.existingGithubMcpSecret | quote }}
+                  key: {{ .Values.githubMcpSecretKey | quote }}
             {{- end }}
             {{- with .Values.extraEnv }}
             {{- toYaml . | nindent 12 }}
