@@ -481,6 +481,7 @@ dependencies = [
     { name = "a2a-sdk" },
     { name = "google-adk", extra = ["a2a"] },
     { name = "mcp-server-git" },
+    { name = "python-dotenv" },
     { name = "uvicorn" },
 ]
 
@@ -494,6 +495,7 @@ requires-dist = [
     { name = "a2a-sdk", specifier = ">=1,<2" },
     { name = "google-adk", extras = ["a2a"], specifier = ">=2.10.0,<3" },
     { name = "mcp-server-git", specifier = ">=2026.8.18" },
+    { name = "python-dotenv", specifier = ">=1.2.3" },
     { name = "uvicorn", specifier = ">=0.54.0" },
 ]
 

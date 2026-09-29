@@ -9,7 +9,8 @@ service:
   port: 8001
 
 gitmcpUrl: https://gitmcp.io/docs
-model: gemini-flash-latest
+model: gemini-3.6-flash
+temperature: "0"
 existingSecret: ""
 extraEnv: []
 

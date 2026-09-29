@@ -33,6 +33,8 @@ spec:
               value: {{ .Values.gitmcpUrl | quote }}
             - name: GIT_AGENT_MODEL
               value: {{ .Values.model | quote }}
+            - name: GIT_AGENT_TEMPERATURE
+              value: {{ .Values.temperature | quote }}
             {{- if .Values.existingSecret }}
             - name: GOOGLE_API_KEY
               valueFrom:

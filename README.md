@@ -23,8 +23,15 @@ tools. It is not a shell command runner.
 
 ## Run locally
 
-Requires Python 3.11+, `uv`, and credentials for the chosen ADK model. For
-Gemini API key authentication, set `GOOGLE_API_KEY` in your environment.
+Requires Python 3.11+, `uv`, and credentials for the chosen ADK model. Copy
+`.env.example` to `.env` in this repository's root and set `GOOGLE_API_KEY`.
+The `.env` file is ignored by Git and loaded when the service starts from the
+repository root. Existing process environment variables take precedence.
+
+```sh
+cp .env.example .env
+# Edit .env and set GOOGLE_API_KEY
+```
 
 ```sh
 uv sync --locked
@@ -58,8 +65,14 @@ only the intended repository into the agent container, preferably read-only.
 | `GITMCP_URL` | `https://gitmcp.io/docs` | Generic GitMCP endpoint; empty disables it |
 | `GIT_REPOSITORY_PATH` | unset | Git checkout for local MCP operations |
 | `GIT_AGENT_BASE_URL` | `http://localhost:8001` | A2A URL advertised to other services |
-| `GIT_AGENT_MODEL` | `gemini-flash-latest` | ADK model name |
+| `GIT_AGENT_MODEL` | `gemini-3.6-flash` | ADK model name |
+| `GIT_AGENT_TEMPERATURE` | `0` | Model sampling temperature (0 to 1) |
 | `PORT` | `8001` | A2A listening port |
+
+Google recommends the default temperature of 1.0 for Gemini 3 models because
+lower values can cause looping or weaker reasoning in some tasks. This service
+uses 0 as requested; change `GIT_AGENT_TEMPERATURE` if that behavior appears.
+See the [Gemini 3 guidance](https://ai.google.dev/gemini-api/docs/gemini-3#temperature).
 
 ## Container and Helm
 

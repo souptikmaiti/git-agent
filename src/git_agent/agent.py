@@ -8,6 +8,7 @@ from google.adk.tools.mcp_tool.mcp_session_manager import (
     StdioConnectionParams,
     StreamableHTTPConnectionParams,
 )
+from google.genai import types
 from mcp import StdioServerParameters
 
 from git_agent.config import Settings
@@ -61,6 +62,9 @@ def build_agent(settings: Settings) -> LlmAgent:
     return LlmAgent(
         name="git_agent",
         model=settings.model,
+        generate_content_config=types.GenerateContentConfig(
+            temperature=settings.temperature
+        ),
         description="Research public GitHub code and inspect configured Git checkouts.",
         instruction=(
             "Answer questions about Git repositories using the available MCP tools. "
