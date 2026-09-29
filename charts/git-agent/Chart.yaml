@@ -1,0 +1,6 @@
+apiVersion: v2
+name: git-agent
+description: A2A Git research agent backed by MCP
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

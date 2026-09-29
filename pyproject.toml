@@ -1,0 +1,24 @@
+[project]
+name = "git-agent"
+version = "0.1.0"
+description = "A2A Git research agent built with Google ADK and MCP"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "a2a-sdk>=1,<2",
+    "google-adk[a2a]>=2.10.0,<3",
+    "mcp-server-git>=2026.8.18",
+    "uvicorn>=0.54.0",
+]
+
+[project.scripts]
+git-agent = "git_agent.server:main"
+
+[build-system]
+requires = ["uv_build>=0.11.23,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
