@@ -16,6 +16,10 @@ class Settings:
     model: str = "gemini-3.6-flash"
     # Google recommends the default 1.0 for Gemini 3 to avoid degraded reasoning.
     temperature: float = 1.0
+    a2a_task_database_url: str = field(
+        default="postgresql+asyncpg://postgres@127.0.0.1:5432/git_agent_tasks",
+        repr=False,
+    )
     port: int = 8001
 
     @classmethod
@@ -31,6 +35,9 @@ class Settings:
             ).strip(),
             model=os.getenv("GIT_AGENT_MODEL", "gemini-3.6-flash"),
             temperature=float(os.getenv("GIT_AGENT_TEMPERATURE", "1.0")),
+            a2a_task_database_url=os.getenv(
+                "A2A_TASK_DATABASE_URL", cls.a2a_task_database_url
+            ).strip(),
             port=int(os.getenv("PORT", "8001")),
         )
         settings.validate()
@@ -52,3 +59,10 @@ class Settings:
             raise ValueError("PORT must be between 1 and 65535")
         if not 0 <= self.temperature <= 1:
             raise ValueError("GIT_AGENT_TEMPERATURE must be between 0 and 1")
+        database = urlparse(self.a2a_task_database_url)
+        if (
+            database.scheme != "postgresql+asyncpg"
+            or not database.hostname
+            or not database.path.strip("/")
+        ):
+            raise ValueError("A2A_TASK_DATABASE_URL must be a postgresql+asyncpg URL with a host and database")
